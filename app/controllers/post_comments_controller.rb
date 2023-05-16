@@ -8,14 +8,11 @@ class PostCommentsController < ApplicationController
     redirect_to post_image_path(post_image)
   end
 
-def show
-  @post_image = PostImage.find(params[:id])
-  if user_signed_in?
-    @post_comment = current_user.post_comments.new
-  else
-    @post_comment = PostComment.new
+
+  def destroy
+    PostComment.find(params[:id]).destroy
+    redirect_to post_image_path(params[:post_image_id])
   end
-end
 
   private
 
